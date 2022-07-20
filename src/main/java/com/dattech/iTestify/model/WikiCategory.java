@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -14,27 +13,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Wiki {
+public class WikiCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 //    @ApiModelProperty(notes="Unique auto generated identifier for the system")
     private Integer id;
 
-    //    @ApiModelProperty(notes="Wiki name or title")
-    @Column(name= "title")
-    private String title;
-
-
-    //    @ApiModelProperty(notes="Wiki description")
-    @Column(name= "description")
-    private String description;
-
-    @ManyToOne
-    private Author author;
-
-    @Column(name= "timestamp")
-    private Timestamp timestamp;
-
+    //    @ApiModelProperty(notes="Author's first name ")
+    @Column(name= "name")
+    private String name;
 
     @ManyToMany
     private List<Wiki> wikis;

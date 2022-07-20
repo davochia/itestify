@@ -3,8 +3,8 @@ package com.dattech.iTestify.controller;
 
 import com.dattech.iTestify.dto.AuthorDto;
 import com.dattech.iTestify.exception.AuthorNotFoundException;
-import com.dattech.iTestify.service.HelloImpl.Hello;
 import com.dattech.iTestify.service.ItestifyImpl.ItestifyServiceImpl;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,32 +13,21 @@ import java.util.List;
 @RestController
 public class AuthorController {
 
-    @Autowired
-    private Hello helloService;
+
 
     @Autowired
     private ItestifyServiceImpl itestifyServiceImpl;
 
-//    @ApiOperation(value="Add a new author to system", response= Author.class)
-    @GetMapping("/hello")
-    public String helloWorld(){
-        return helloService.getHello();
-    }
-
-    @PostMapping("/name")
-    public String postName(@RequestBody String name){
-        return helloService.putHello(name);
-    }
-
-        // Add new Author
-//    @ApiOperation(value="Add a new author to system", response= AuthorDto.class)
+    // Add new Author
 //    @RequestMapping(value = "/author", method = RequestMethod.POST)
+    @ApiOperation(value="Add a new author to system", response= AuthorDto.class)
     @PostMapping("/author")
     public AuthorDto addAuthor(@RequestBody AuthorDto authorDto) {
         return itestifyServiceImpl.addAuthor(authorDto);
     }
 
     // Get Authors
+    @ApiOperation(value="Get all authors from system", response= AuthorDto.class)
     @GetMapping("/authors")
     public List<AuthorDto> getAuthors()  {
         return itestifyServiceImpl.getAuthors();
@@ -47,6 +36,7 @@ public class AuthorController {
 
 
     // Get Author by id
+    @ApiOperation(value="Get author from system find by id", response= AuthorDto.class)
     @GetMapping("/author/{id}")
     public AuthorDto getAuthor(@PathVariable Integer id) throws AuthorNotFoundException {
         return itestifyServiceImpl.findAuthorById(id);
@@ -55,15 +45,17 @@ public class AuthorController {
 
 
     // Edit Author info
+    @ApiOperation(value="Edit author in the system", response= AuthorDto.class)
     @PutMapping("/author/{id}")
     public AuthorDto editAuthor(@PathVariable Integer id, @RequestBody AuthorDto newAuthor){
-        return itestifyServiceImpl.modifyAuthor(id, newAuthor);
+        return itestifyServiceImpl.modifyWikiCategory(id, newAuthor);
     }
 
 
     // Delete author
+    @ApiOperation(value="Delete author from system", response= AuthorDto.class)
     @DeleteMapping("/author/{id}")
-    public void deleteAuthor(@PathVariable Integer id) {
-        itestifyServiceImpl.removeAuthor(id);
+    public Boolean deleteAuthor(@PathVariable Integer id) {
+       return itestifyServiceImpl.removeAuthor(id);
     }
 }
