@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -40,5 +41,12 @@ public class Author {
     @OneToMany(mappedBy = "author")
     @ApiModelProperty(notes="List of author's wikis")
     private List<Wiki> wikis;
+
+    @ManyToMany
+    @JoinTable(
+            name = "wiki_like",
+            joinColumns = @JoinColumn(name = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "wiki_id"))
+    private Set<Wiki> likedWikis;
 
 }

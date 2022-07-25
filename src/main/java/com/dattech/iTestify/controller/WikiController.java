@@ -16,9 +16,9 @@ public class WikiController {
 
     // Add new wiki
     @ApiOperation(value="Add a new wiki to system", response= WikiDto.class)
-    @PostMapping("/wiki")
-    public WikiDto addWiki(@RequestBody WikiDto wikiDto) {
-        return itestifyServiceImpl.addWiki(wikiDto);
+    @PostMapping("/wiki/{authorId}")
+    public WikiDto addWiki(@RequestBody WikiDto wikiDto,@PathVariable Integer authorId) {
+        return itestifyServiceImpl.addWiki(wikiDto, authorId);
     }
 
     // Get Wikis

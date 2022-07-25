@@ -1,12 +1,13 @@
 package com.dattech.iTestify.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,13 +17,13 @@ import java.util.List;
 public class WikiCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-//    @ApiModelProperty(notes="Unique auto generated identifier for the system")
+    @ApiModelProperty(notes="Unique auto generated identifier for the system")
     private Integer id;
 
-    //    @ApiModelProperty(notes="Author's first name ")
+    @ApiModelProperty(notes="Author's first name ")
     @Column(name= "name")
     private String name;
 
     @ManyToMany
-    private List<Wiki> wikis;
+    private Set<Wiki> wikis;
 }

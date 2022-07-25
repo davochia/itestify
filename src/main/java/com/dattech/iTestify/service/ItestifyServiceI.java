@@ -18,7 +18,7 @@ public interface ItestifyServiceI {
     Boolean removeAuthor(Integer id) ;
 
     ///////////////// Wiki //////////////////////////
-    WikiDto addWiki(WikiDto WikiDto);
+    WikiDto addWiki(WikiDto WikiDto, Integer authorId);
     WikiDto findWikiById(Integer id) throws WikiNotFoundException;
     List<WikiDto> getWikis( );
     WikiDto modifyWiki(Integer id, WikiDto WikiDto);
